@@ -28,3 +28,7 @@ On `runtime.onStartup`, the extension queries all pinned tabs and calls `tabs.di
 Download the signed `.xpi` from the [latest release](https://github.com/nnyj/firefox-tab-discard-startup/releases/latest) and open it in Firefox (or drag it into a Firefox window), then confirm the install prompt.
 
 The extension is signed by Mozilla through the unlisted (self-distribution) channel, so it installs on release Firefox without changing any settings.
+
+## License
+
+[MIT](LICENSE)
