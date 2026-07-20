@@ -8,11 +8,20 @@
 
 </div>
 
-Firefox extension that discards pinned tabs on browser startup, so [Tree Style Tab](https://addons.mozilla.org/en-US/firefox/addon/tree-style-tab/) shows them in the pending (dimmed) state instead of appearing loaded.
+Firefox extension that discards pinned tabs on browser startup, so tab sidebar extensions like [Tree Style Tab](https://addons.mozilla.org/en-US/firefox/addon/tree-style-tab/) and [Sidebery](https://addons.mozilla.org/en-US/firefox/addon/sidebery/) show them in the unloaded (dimmed) state instead of appearing loaded.
+
+## Why
+
+Firefox restores pinned tabs as loaded on startup, even with `browser.sessionstore.restore_pinned_tabs_on_demand` set to `true`. Long-standing open Bugzilla issues:
+
+- [Bug 1466440](https://bugzilla.mozilla.org/show_bug.cgi?id=1466440): restore on demand not honored for pinned tabs (open since 2018)
+- [Bug 1853047](https://bugzilla.mozilla.org/show_bug.cgi?id=1853047): unloaded pinned tabs still spawn a process despite `restore_pinned_tabs_on_demand` (open since 2023)
+
+Also tracked from the sidebar side in [Sidebery #1381](https://github.com/mbnuqw/sidebery/issues/1381).
 
 ## How it works
 
-On `runtime.onStartup`, the extension queries all pinned tabs and calls `tabs.discard()` on each one except the currently active tab. Firefox restores pinned tabs as loaded on startup by default, which makes TST render them as active even though they were never visited; discarding them restores the dimmed unloaded look and frees their memory.
+On `runtime.onStartup`, the extension queries all pinned tabs and calls `tabs.discard()` on each one except the currently active tab. This restores the dimmed unloaded look in TST/Sidebery and frees their memory until visited.
 
 ## Install
 
